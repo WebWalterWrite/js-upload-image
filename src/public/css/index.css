@@ -1,0 +1,88 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: content-box;
+}
+
+body{
+    /* credit photo : pixabay
+       website      : https://pixabay.com/fr/
+       url source   : https://pixabay.com/fr/photos/personnages-gros-plan-darth-vader-1853286
+    */
+    background-image: url('https://cdn.pixabay.com/photo/2016/11/23/14/41/characters-1853286_1280.jpg');
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+header{
+    background-color: #272c3367;
+    padding: 1em;
+    border-bottom:solid 1px #FFFFFF;
+}
+header h1{
+    color: #F7DE1D;
+}
+main{
+    display:flex;
+    justify-content: center;
+}
+section{
+    margin: 0;
+    padding: 1%;
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 30%; 
+    transform: translateY(-50%);
+    background-color:  rgba(247, 222, 29, 0.5);
+    border:solid 1px #FFFFFF;
+}
+
+section h3{
+    text-align: center;
+}
+
+/* form */
+
+form{
+    margin-top:1em;
+    text-align: center;
+}
+
+form div{
+    margin:1em 0 1em 0;
+}
+label{
+    display: block;
+}
+
+/* input form */
+input[type="text"]{
+    text-align: center;
+    border:none;
+    border-bottom:2px solid #F7DE1D;
+    outline: none;
+    background-color:transparent;
+    font-size: 18px;
+    margin-top:1em;
+}
+.filelem{
+    display: none;
+}
+
+/* btn open file */
+.openfile, label{
+    background-color: #000000;
+    color: #F7DE1D;
+    margin: 0 auto;
+    padding:.5em;
+    cursor: pointer;
+    width: 60%;
+    text-align: center;
+}
+
+input[type="submit"]{
+    background-color: #F7DE1D;
+    margin-top:2em;
+    padding: .5em;
+    border: none;
+}
