@@ -1,0 +1,25 @@
+<section>
+
+    <h3>Upload Your Image</h3>
+
+    <form action="/upload" enctype="multipart/form-data" method="POST">
+
+        <div class="step1">1</div>
+
+        <div class="filename" id="file">
+            <label for="filename"> donne un nom à ton image</label>
+            <input type="text" id="fileName" name="filename" value="" placeholder="ex: yodamaster">
+            <div id="err"></div>
+        </div>
+        
+        <div class="step2">2</div>
+
+        <input type="file" name="profile" class="filelem" id="fileElem">
+
+        <div class="openfile" id="openFile">importer une image</div>
+
+{{!-- soumission formulaire --}}
+        <input type="submit" value="envoyer" />
+    </form>
+    {{{ msg }}}
+</section>
