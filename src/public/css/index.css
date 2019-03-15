@@ -79,7 +79,7 @@ section h3{
 
 
 /* photo de profile */
-.profile_img img:last-child{
+.profile_img img:nth-child(2){
     border-radius:50%;
 }
 
@@ -114,12 +114,37 @@ section h3{
 
 /* progress bar  */
 
-.progress{
-    display: block;
-    margin:0 auto;
-   
+.contain_progress{
+    height:50px;
+    opacity: hidden;
 }
 
+
+progress[value] {
+    width: 200px;
+    height: 10px;
+    margin: 0 auto;
+    margin-bottom:5px;
+    display: block;
+    /* Important Thing */
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+  }
+progress[value]::-webkit-progress-bar {
+    background-color:transparent;
+    border-radius: 50px;
+    box-shadow:transparent;
+}
+progress[value]::-webkit-progress-value {
+    border-radius: 50px;
+    box-shadow: inset 0 1px 1px 0 rgba(247, 222, 29, 0.493);
+    background-image: -webkit-linear-gradient(#F7DE1D, #F7DE1D);
+    /* with stripe pattern*/
+    
+}
+
+/* pourcentage chiffre */
 .progress_percent{
     color:#F7DE1D;
 }
@@ -129,8 +154,15 @@ section h3{
     100% { opacity: 0; transform: scale(1,0);}
 }
 
+@keyframes visible {
+    0%   { opacity: 0; transform: scale(1);}
+    100% { opacity: 1; transform: scale(1,0);}
+}
+
+
 .hidden{
     animation: hide 1s ease-out;
     animation-fill-mode: forwards;
     animation-delay: 1s;
 }
+
