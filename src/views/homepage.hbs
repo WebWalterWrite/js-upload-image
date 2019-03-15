@@ -2,24 +2,26 @@
 
     <h3>Upload Your Image</h3>
 
-    <form action="/upload" enctype="multipart/form-data" method="POST">
+    <div class="form">
 
-        <div class="step1">1</div>
+        <div class="profile_img">
+            <img id="choose_img" src="/public/img/user-2493635_640.png" alt="" width="40">
+            <img id="user_img" src="/public/img/user.png" alt="profile user" width="150" height="150">
+        </div>
 
-        <div class="filename" id="file">
-            <label for="filename"> donne un nom à ton image</label>
-            <input type="text" id="fileName" name="filename" value="" placeholder="ex: yodamaster">
-            <div id="err"></div>
+{{!-- progress bar --}}
+        <div id="contain_progress">
+        <progress id="file_progress" max="100" value="0">10</progress>
+        <p id="percent_progress" class="progress_percent"></p>
         </div>
         
-        <div class="step2">2</div>
-
         <input type="file" name="profile" class="filelem" id="fileElem">
 
-        <div class="openfile" id="openFile">importer une image</div>
+        <button type="button" class="openfile" id="openFile">Envoyer</button>
+        <div id="err_file" class="file_err"></div>
+
 
 {{!-- soumission formulaire --}}
-        <input type="submit" value="envoyer" />
-    </form>
+        </div>
     {{{ msg }}}
 </section>
