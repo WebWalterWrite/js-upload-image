@@ -3,7 +3,9 @@ node_modules
 
 src/public/upload/
 src/storage/
-
+src/.DS_Store
 #files
 .env
+.DS_Store
+
 
