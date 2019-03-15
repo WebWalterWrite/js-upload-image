@@ -9,7 +9,7 @@ body{
        website      : https://pixabay.com/fr/
        url source   : https://pixabay.com/fr/photos/personnages-gros-plan-darth-vader-1853286
     */
-    background-image: url('https://cdn.pixabay.com/photo/2016/11/23/14/41/characters-1853286_1280.jpg');
+    background-image: url('/public/img/background-img.jpg');
     background-size:cover;
     background-repeat:no-repeat;
 }
@@ -31,58 +31,106 @@ section{
     position: absolute;
     top: 50%;
     width: 30%;
-    height: 30%; 
+    height: 40%; 
     transform: translateY(-50%);
-    background-color:  rgba(247, 222, 29, 0.5);
-    border:solid 1px #FFFFFF;
+    background-color:  rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 20px #F7DE1D;
 }
 
 section h3{
     text-align: center;
+    color: #FFFFFF;
 }
 
 /* form */
 
-form{
+.form{
     margin-top:1em;
     text-align: center;
 }
 
-form div{
-    margin:1em 0 1em 0;
-}
-label{
-    display: block;
+.form div{
+    margin: 0 auto;
+    margin-bottom:1em;
 }
 
-/* input form */
-input[type="text"]{
-    text-align: center;
-    border:none;
-    border-bottom:2px solid #F7DE1D;
-    outline: none;
-    background-color:transparent;
-    font-size: 18px;
-    margin-top:1em;
-}
+/* input file */
 .filelem{
     display: none;
 }
 
-/* btn open file */
-.openfile, label{
+/* container photo */
+.profile_img{
+    position:relative;
+}
+
+/* icon ajout photo */
+.profile_img img:first-child{
+    position: absolute;
+    border-radius:50%;
+    border: solid 2px #F7DE1D;
+    cursor:pointer;
+    opacity: .7;
+    transition: opacity .3 ease-in-out;
+}
+.profile_img img:first-child:hover{
+    opacity: 1;
+}
+
+
+/* photo de profile */
+.profile_img img:last-child{
+    border-radius:50%;
+}
+
+/* bouton envoi fichier*/
+.openfile{
     background-color: #000000;
     color: #F7DE1D;
     margin: 0 auto;
     padding:.5em;
-    cursor: pointer;
-    width: 60%;
+    width: 40%;
+    outline: none;
     text-align: center;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    letter-spacing: 3px;
 }
 
-input[type="submit"]{
-    background-color: #F7DE1D;
-    margin-top:2em;
-    padding: .5em;
-    border: none;
+.openfile:hover{
+    border-radius: 13px;
+    border-color: #F7DE1D;
+    letter-spacing: 0;
+}
+
+
+/* message erreur fichier */
+.file_err{
+    color:red;
+    text-align:center;
+    margin-top:1em !important;
+}
+
+
+/* progress bar  */
+
+.progress{
+    display: block;
+    margin:0 auto;
+   
+}
+
+.progress_percent{
+    color:#F7DE1D;
+}
+
+@keyframes hide{
+    0%   { opacity: 1; transform: scale(1);}
+    100% { opacity: 0; transform: scale(1,0);}
+}
+
+.hidden{
+    animation: hide 1s ease-out;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
 }
