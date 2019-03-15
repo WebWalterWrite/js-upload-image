@@ -1,5 +1,9 @@
 # Node directory
 node_modules
 
+src/public/upload/
+src/storage/
+
 #files
 .env
+
