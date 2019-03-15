@@ -21,5 +21,8 @@ export const storeImage =  (req, res) => {
         })
 }
 
+export const home = (req, res) => {
+    res.render('homepage' )
+}
 
 
