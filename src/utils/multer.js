@@ -36,10 +36,12 @@ const isFileType = (file, cb) => {
 }
 
 
-export const upload = multer({
+const upload = multer({
     storage: storage,
     limits: {
         fileSize: 8 * 1024 * 1024
     },
     fileFilter: (req, file, cb) => isFileType(file, cb)
 });
+
+export default upload;
