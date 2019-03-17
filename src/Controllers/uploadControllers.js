@@ -1,9 +1,15 @@
-import { upload } from '../utils/multer'
+import upload from '../utils/multer'
+import { getImg, setImg } from "../utils/fileSystem";
 
 
+export const storeImage =  async (req, res) => {
 
-export const storeImage =  (req, res) => {
-
+    const img = await setImg()
+   if(img > 0){
+       const ifImg = await getImg();
+       console.log(ifImg)
+       return res.json({img: 'supprimé'})
+   }
 
     const multer = upload.single('profile')
 
