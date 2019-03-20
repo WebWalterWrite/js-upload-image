@@ -1,34 +1,40 @@
-import upload from '../utils/multer'
-import { getImg, setImg } from "../utils/fileSystem";
+import upload from "../utils/multer";
+import { getImg, removeImg } from "../utils/fileSystem";
 
+export const storeImage = async (req, res) => {
+	const img = await getImg();
 
-export const storeImage =  async (req, res) => {
+	if (img && img.length > 0) {
+		await removeImg(...img)
 
-    const img = await setImg()
-   if(img > 0){
-       const ifImg = await getImg();
-       console.log(ifImg)
-       return res.json({img: 'supprimé'})
-   }
+	const multer = upload.single("profile");
 
-    const multer = upload.single('profile')
+	multer(req, res, async err => {
+        
+		(await err)
+			? 
+			  res.json({ msg: `<div class='error'>${err.message}</div>` })
+			: 
+			  res.json({
+					msg: "Votre image est bien enregistrée",
+					img: `upload/${req.file.filename}`
+			  });
+    });
+    }
+};
 
-     multer(req, res, async err =>{ 
-        console.log(req.file)
-         await err ?
-            // A Multer error occurred when uploading.
-            res.json({msg:`<div class='error'>${err.message}</div>`})
-           :
-            // An unknown error occurred when uploading.
-            res.json({
-                msg:"Votre image est bien enregistrée",
-                img: `upload/${req.file.filename}`
-            }) 
-        })
-}
 
 export const home = (req, res) => {
-    res.render('homepage' )
+
+	res.render("homepage");
+};
+
+
+
+export const getProfile = async (req, res) => {
+
+    const img = await getImg()
+
+    res.json({img:img})
+
 }
-
-
