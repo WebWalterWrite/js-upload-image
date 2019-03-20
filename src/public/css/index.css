@@ -13,6 +13,9 @@ body{
     background-size:cover;
     background-repeat:no-repeat;
 }
+p{
+    font-family:  'Quattrocento Sans', sans-serif;
+}
 header{
     background-color: #272c3367;
     padding: 1em;
@@ -59,14 +62,11 @@ section h3{
     display: none;
 }
 
-/* container photo */
-.profile_img{
-    position:relative;
-}
 
 /* icon ajout photo */
 .profile_img img:first-child{
     position: absolute;
+    z-index:99;
     border-radius:50%;
     border: solid 2px #F7DE1D;
     cursor:pointer;
@@ -82,7 +82,13 @@ section h3{
 .profile_img img:nth-child(2){
     border-radius:50%;
 }
-
+.blur_img{
+    filter: blur(10px);
+    transition: all 500ms ease-in;
+}
+.no_blur_img{
+    transition: all 1s ease-out;
+}
 /* bouton envoi fichier*/
 .openfile{
     background-color: #000000;
@@ -166,3 +172,96 @@ progress[value]::-webkit-progress-value {
     animation-delay: 1s;
 }
 
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut{
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+
+/* fenetre modal */
+.modal{
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    height: 100%;
+    z-index:999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:0 auto;
+    animation: fadeIn .300s forwards;
+    background-color: #0000009a;
+    text-align: center;
+}
+
+.hide_modal{
+    animation: fadeOut 1s forwards;
+    z-index: -999;
+}
+.content_modal{
+    position: absolute;
+    width: 30%;
+    height: 40%; 
+    display: inline-block;
+    justify-content:space-around;
+    background-color: #F7DE1D;
+
+}
+
+.content_modal img{
+    margin-top:1em;
+    border-radius:50%;
+    border: solid 1px #ffffff;
+}
+.box_btn{
+    display: flex;
+    justify-content: center;
+    margin-top:20px;
+}
+
+
+.box_btn p{
+    cursor: pointer;
+    padding:5px;
+    margin:0px 20px 50px 20px;
+    text-align: center;
+    font-size:14px; 
+    letter-spacing: 2px;
+    width: 40%;
+    background-color: #ffffff;
+    transition: all 0.2s ease-in-out;
+}
+.box_btn p:first-child{
+    color: #ff0000;
+    border: solid 1px #ff0000;
+}
+.box_btn p:last-child{
+    color:#008000;
+    border: solid 1px #008000;
+}
+
+/* 
+survol des boutons de la modal
+effet box intérieur
+*/
+.content_modal p:hover{
+    border-radius: 10px; 
+}
+.content_modal p:first-child:hover{
+   box-shadow: 0px 0px 6px #ff0000 inset;
+}
+.content_modal p:last-child:hover{
+    box-shadow: 0px 0px 6px#008000 inset;
+ }
