@@ -1,5 +1,5 @@
 import router from './config';
-import { home, getProfile,  storeImage } from '../Controllers/uploadControllers';
+import { home, deleteImage, getProfile,  storeImage } from '../Controllers/uploadControllers';
 
 /**
  * @description Renvoi page d'accueil
@@ -17,6 +17,10 @@ router.get('/profile', getProfile)
  */
 router.post('/upload',storeImage)
 
+/**
+ * @description - insert nouvelle image de profile
+ */
+router.post('/delete', deleteImage)
 
 
 
