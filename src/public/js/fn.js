@@ -1,3 +1,4 @@
+import { axiosPostImage } from "./api.js";
 
 
 /**
@@ -11,14 +12,6 @@ export const getMimeType = type => {
 
     return types.includes(type);
 }
-
-
-
-// progression des transferts depuis le serveur jusqu'au client (téléchargement)
- const updateProgress = (evt) => {
-    evt.lengthComputable && 
-    console.log( Math.round(progressEvent.loaded/progressEvent.total * 100) + '%')  
-  }
 
 
   /**
@@ -36,3 +29,42 @@ export const getMimeType = type => {
         user.setAttribute('src',`/public/${img}`)
     )  
 }
+
+export const getImg = ({img}) => {
+
+    
+    let user = document.querySelector('#user_img');
+    user.className="no_blur_img";
+    user.setAttribute('src', `/public/upload/${img}`)
+   
+}
+
+
+/**
+ * @description - Soumettre la photo 
+ */
+export const sendFile = async () => {
+    
+    const inputFile = document.getElementById("fileElem");
+    const errFile = document.querySelector("#err_file");
+
+    const file = inputFile.files[0];
+    
+    // check si un fichier est fourni
+    if (!file) return (errFile.textContent = "Aucune image soumise");
+
+    // check si le fichier est bien au format jpeg/jpg/png
+    if (!getMimeType(file.type))
+        return (errFile.textContent = "L'image doit être de format jpeg ou png");
+
+    //check si la taille du fichier est > à 2MO
+    if (file.size > 2000000)
+        return (errFile.textContent = "L'image ne doit pas dépasser 2Mo");
+
+    // Si aucune erreur, l'image est envoyée
+    const result = await axiosPostImage(file, setImg);
+
+    return result;
+};
+
+
