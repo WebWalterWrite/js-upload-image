@@ -32,10 +32,10 @@ export const getMimeType = type => {
 
 export const getImg = ({img}) => {
 
-    
+    console.log(img)
     let user = document.querySelector('#user_img');
     user.className="no_blur_img";
-    user.setAttribute('src', `/public/upload/${img}`)
+    user.setAttribute('src', img ? `/public/upload/${img}` : '/public/img/user.png')
    
 }
 
