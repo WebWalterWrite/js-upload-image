@@ -1,40 +1,33 @@
-import { getMimeType, setImg } from "./fn.js";
-import { axiosPostImage } from './api.js';
+import { getImg, sendFile} from "./fn.js";
+import { axiosGetImage } from "./api.js";
+import { modal } from './component.js'
 
-document.addEventListener("DOMContentLoaded",  () => {
+document.addEventListener("DOMContentLoaded", () => {
+	
+	const iconBtn = document.getElementById("choose_img")
+	const fileBtn = document.getElementById("openFile")
 
-	const fileBtn = document.getElementById("openFile");
-	const inputFile = document.getElementById("fileElem");
-	const iconBtn = document.getElementById("choose_img");
-	const errFile = document.querySelector("#err_file");
+	console.log(document.getElementById("fileElem").files[0]);
+	// récupérer la photo de profil
+	axiosGetImage(getImg)
 
-	// Ajouter une photo
+/*
+	au click sur user icon :
+	- récupérer le path de la phoeto de profil
+	- afficher la modal
+*/
 	iconBtn.addEventListener("click", () => {
-		inputFile.click();
-	});
 
-	// Soumettre la photo
-	fileBtn.addEventListener("click",  async () => {
-		const file = inputFile.files[0];
+		const img = document.querySelector('#user_img');
+		
+		const src = img.hasAttribute('src') && img.getAttribute('src');
+		
+		document.body.appendChild(modal(src));
+	})
 
-       
-    // check si un fichier est fourni
-        if (!file) 
-         return errFile.textContent = "Aucun image soumise";
-            
-    // check si le fichier est bien au format jpeg/jpg/png
-        if (!getMimeType(file.type))
-        return errFile.textContent = "L'image doit être de format jpeg ou png";
-    
-    //check si la taille du fichier est > à 2MO
-        if (file.size > 2000000)
-        return errFile.textContent="L'image ne doit pas dépasser 2Mo"
- 
-
-        const result = await axiosPostImage(file,setImg)
-
-       return result;
-       
-	});
+/*
+	Au click sur le bouton encoyer, envoyer la photo.
+*/
+	fileBtn.addEventListener('click', () => sendFile())
+	
 });
- 
