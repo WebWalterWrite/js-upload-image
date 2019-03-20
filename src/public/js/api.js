@@ -68,3 +68,13 @@ export const axiosPostImage = async (file, cb) => {
     
     cb(data)
 }
+
+/**
+ * @description -récupérer l'image stockée localement
+ * @param {function} cb 
+ */
+export const axiosGetImage = async cb => {
+
+    const { data } = await axios.get('http://localhost:3000/profile')
+    cb(data)
+}
