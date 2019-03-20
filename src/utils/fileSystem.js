@@ -17,9 +17,13 @@ export const getImg = async () => {
 
 export const removeImg = async (val) => {
     try {
-      
-        const rmv = await unlink(pathImg+val)
-        return  rmv
+        console.log(val)
+        const ifDelete = val.includes('../public/upload/');
+
+        const fullPath = ifDelete && path.join(__dirname,val);
+
+        await unlink( fullPath || pathImg+val)
+        
     } catch (error) {
         console.log("L'erreur removeImg fn suivante est survenue: ", error.message);
     }
