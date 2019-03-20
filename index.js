@@ -5,8 +5,6 @@ import imageRoute from './src/Routes/uploadRoute'
 import path from 'path';
 import exphbs from 'express-handlebars'
 
-
-
 const app = express()
 
 // static files rendering
@@ -29,6 +27,7 @@ app.set('views', path.join(__dirname,'src/views'));
 app.use('/', imageRoute)
 
 // run server
-app.listen(3000, () => console.log("it's great"));
+const port = process.env.PORT || 3000
+app.listen( port, () => console.log("it's great"));
 
 export default app;
