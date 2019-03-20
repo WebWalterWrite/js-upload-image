@@ -1,5 +1,5 @@
-import { sendFile } from './fn.js'
-
+import { sendFile } from './fn.js';
+import { axiosDeleteImage } from './api.js';
 // créer modal
 const createElement = el => document.createElement(el);
 const createText = txt => document.createTextNode(txt);
@@ -40,6 +40,13 @@ export const modal = (src) => {
     const rmvTxt = createText('supprimer ma photo');
     createAttribute(rmv, [{attr:'id', val:'rmv'}]);
     rmv.appendChild(rmvTxt);
+    rmv.addEventListener('click', async () => {
+        const name = img.hasAttribute('src') && img.getAttribute('src');
+        console.log(name)
+        await axiosDeleteImage(name);
+        img.setAttribute('src','public/img/user.png')
+         
+    })
 
     // update bouton
     const update = createElement('p');
