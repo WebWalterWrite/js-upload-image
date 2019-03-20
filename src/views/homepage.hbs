@@ -6,7 +6,7 @@
 
         <div class="profile_img">
             <img id="choose_img" src="/public/img/user-2493635_640.png" alt="" width="40">
-            <img id="user_img" src="/public/img/user.png" alt="profile user" width="150" height="150">
+            <img class="blur_img" id="user_img" src="/public/img/user.png" alt="profile user" width="150" height="150">
         </div>
 
 {{!-- progress bar --}}
@@ -16,12 +16,14 @@
         </div>
         
         <input type="file" name="profile" class="filelem" id="fileElem">
-
-        <button type="button" class="openfile" id="openFile">Envoyer</button>
+        <div>
+                <p>Sammy</p>
+                <p>WebWalterWhrite</p>
+        </div>
+        {{!-- <button type="button" class="openfile" id="openFile">Envoyer</button> --}}
         <div id="err_file" class="file_err"></div>
 
 
 {{!-- soumission formulaire --}}
         </div>
-    {{{ msg }}}
 </section>
