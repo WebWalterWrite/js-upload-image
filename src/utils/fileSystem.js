@@ -1,32 +1,26 @@
-import { promises } from 'fs'
+import fs, { promises } from 'fs'
 import path from 'path'
 const { readdir, unlink } = promises
 
 const pathImg = path.join(__dirname, '../public/upload/')
 
-export const getImg = async (cb) =>{
-    try {
-        const isImg = await readdir(pathImg).toString()
-       cb(isImg)
-    } catch (error) {
-        console.log("L'erreur suivante est survenue: ", error.message)
-    }
-}
-export const setImg = async () => {
+
+export const getImg = async () => {
     try {
         const isImg = await readdir(pathImg)
-        return isImg.length
+       
+        return isImg
     } catch (error) {
-        console.log("L'erreur suivante est survenue: ", error.message);
+        console.log("L'erreur setImg fn suivante est survenue: ", error.message);
     }
 }
 
 export const removeImg = async (val) => {
     try {
-       
-        const rmv = await unlink(val)
+      
+        const rmv = await unlink(pathImg+val)
         return  rmv
     } catch (error) {
-        console.log("L'erreur suivante est survenue: ", error.message);
+        console.log("L'erreur removeImg fn suivante est survenue: ", error.message);
     }
 };
