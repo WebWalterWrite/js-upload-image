@@ -75,6 +75,21 @@ export const axiosPostImage = async (file, cb) => {
  */
 export const axiosGetImage = async cb => {
 
-    const { data } = await axios.get('http://localhost:3000/profile')
+    const { data } = await axios.get('http://localhost:3000/profile');
+    
     cb(data)
 }
+
+
+/**
+ * @description - supprimer image de profile
+ */
+
+ export const axiosDeleteImage = async name => {
+     try {
+         const { data } = await axios.post('http://localhost:3000/delete',{img:`..${name}`})
+         return data
+     } catch (error) {
+         console.log('Une erreur est survenue lors de la suppression : ', error.message)
+     }
+ }
