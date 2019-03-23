@@ -1,9 +1,24 @@
-import { sendFile } from './fn.js';
 import { axiosDeleteImage } from './api.js';
-// créer modal
+
+/**
+ * @description - Renvoi un nouvel élement HTML
+ * @param {string} el - nom du tag HTML
+ */
 const createElement = el => document.createElement(el);
+
+
+/**
+ * @description - Insert du contenu à l'élément html
+ * @param {string} txt - Contient la valeur de l'élément html
+ */
 const createText = txt => document.createTextNode(txt);
 
+
+/**
+ * @description - ajoute attribut(s) sur l'élément html
+ * @param {string} el - tag html (div, p, img...)
+ * @param {string} arr - nom de l'attribut (src, class, id ...)
+ */
 const createAttribute = (el,arr) => (
 
     el = arr.map( ({attr, val}) => el.setAttribute(attr, val))
@@ -31,11 +46,11 @@ export const modal = (src) => {
         {attr:'height',val:'200px'}
     ]);
 
-    // box bouton
+// box bouton
     const boxBtn = createElement('div');
     boxBtn.setAttribute('class','box_btn');
 
-    // delete bouton
+// delete bouton
     const rmv = createElement('p');
     const rmvTxt = createText('supprimer ma photo');
     createAttribute(rmv, [{attr:'id', val:'rmv'}]);
@@ -46,23 +61,29 @@ export const modal = (src) => {
         await axiosDeleteImage(name);
         img.setAttribute('src','public/img/user.png')
          
-    })
+    });
 
-    // update bouton
+// update bouton
     const update = createElement('p');
     const updatetext = createText('modifier ma photo');
     createAttribute(update, [{attr:'id', val:'update'}]);
     update.appendChild(updatetext);
     update.addEventListener('click', () => inputFile.click());
 
-    // Une fois le fichier selectionné la modal se referme
-    inputFile.addEventListener('change', () => (
-        div.classList.add('hide_modal'),
-        sendFile()
-        ))
+// progress bar
+    const progressBox = createElement('div');
+    createAttribute(progressBox, [{ attr: 'id', val:'contain_progress'}])
+    const progress = createElement('progress');
+    createAttribute(progress,[{attr:'id', val:'file_progress'},{attr:'max', val:'100'}, {attr:'value', val:'0'}]);
+    const percent = createElement('p');
+    createAttribute(percent, [{attr:'id',val:'percent_progress'}, {attr:'class', val:'progress_percent'}]);
 
+// error upload
+    const fileError = createElement('div');
+    createAttribute(fileError, [{attr: 'id', val: 'err_file'}, {attr: 'class', val: 'upload_msg'}]);
     boxBtn.append(rmv, update);
-    contentModal.append(img,boxBtn);
+    progressBox.append(progress, percent);
+    contentModal.append(img,boxBtn, progressBox, fileError);
 
     div.appendChild(contentModal);
 
