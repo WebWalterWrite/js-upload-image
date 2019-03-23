@@ -1,5 +1,5 @@
 import upload from "../utils/multer";
-import { getImg, removeImg } from "../utils/fileSystem";
+import { getImg, getUser, removeImg } from "../utils/fileSystem";
 
 
 /**
@@ -7,6 +7,7 @@ import { getImg, removeImg } from "../utils/fileSystem";
  * @param {object} res Renvoi un json contenant le message err or success / path de l'image
  */
 export const storeImage = async (req, res) => {
+
 	const img = await getImg(); // Vérifier si une image est déjà présente
 
 	img.length > 0 && await removeImg(...img); // Si oui supprimer l'image
@@ -45,6 +46,8 @@ export const home = (req, res) => {
  */
 export const getProfile = async (req, res) => {
 
+		const user = await getUser()
+		console.log(user)
     const img = await getImg()
 		const image = img.length > 0 ? img : false 
     res.json({img:image})
