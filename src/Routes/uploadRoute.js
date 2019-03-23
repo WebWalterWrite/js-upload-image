@@ -20,7 +20,7 @@ router.post('/upload',storeImage)
 /**
  * @description - insert nouvelle image de profile
  */
-router.post('/delete', deleteImage)
+router.delete('/delete', deleteImage)
 
 
 
