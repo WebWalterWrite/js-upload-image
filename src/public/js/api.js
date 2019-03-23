@@ -50,10 +50,10 @@ export const fetchPostImage = async (file, cb) => {
 
 export const axiosPostImage = async (file, cb) => {
 
+    console.log('axios :', file)
     let form = new FormData();
 
     form.append('profile', file, 'profile.png')
-
     const {data} = await axios
     .post('http://localhost:3000/upload',form,
         {
@@ -87,7 +87,8 @@ export const axiosGetImage = async cb => {
 
  export const axiosDeleteImage = async name => {
      try {
-         const { data } = await axios.post('http://localhost:3000/delete',{img:`..${name}`})
+         console.log(name)
+         const { data } = await axios.delete('http://localhost:3000/delete', {data:{img:`..${name}`}})
          return data
      } catch (error) {
          console.log('Une erreur est survenue lors de la suppression : ', error.message)
