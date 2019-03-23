@@ -3,11 +3,10 @@ import { axiosGetImage } from "./api.js";
 import { modal } from './component.js'
 
 document.addEventListener("DOMContentLoaded", () => {
-	
-	const iconBtn = document.getElementById("choose_img")
-	const fileBtn = document.getElementById("openFile")
 
-	console.log(document.getElementById("fileElem").files[0]);
+	const inputFile = document.getElementById("fileElem");
+	const iconBtn = document.getElementById("choose_img")
+
 	// récupérer la photo de profil
 	axiosGetImage(getImg)
 
@@ -25,9 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.body.appendChild(modal(src));
 	})
 
-/*
-	Au click sur le bouton encoyer, envoyer la photo.
-*/
-	fileBtn.addEventListener('click', () => sendFile())
-	
+
+	// Une fois le fichier selectionné la modal se referme
+	inputFile.addEventListener('change', () => {
+		sendFile(inputFile);
+	})
 });
