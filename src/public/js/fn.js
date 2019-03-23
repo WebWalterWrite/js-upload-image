@@ -14,57 +14,76 @@ export const getMimeType = type => {
 }
 
 
+
   /**
    * 
    * @param {object} img -- path image
    * @returns {string} -- chemin relatif à img
    */
-  export const setImg = ({img}) => {
+  export const setImg = ({img, msg}) => {
 
     let user = document.querySelector('#user_img')
     let progress = document.querySelector('#contain_progress');
+    let uploadMsg = document.querySelector("#err_file");
     if(img)
     return (
         progress.classList.add('hidden'),
-        user.setAttribute('src',`/public/${img}`)
+        user.setAttribute('src',`/public/${img}`),
+        uploadMsg.textContent=msg
     )  
 }
 
+/**
+ * @description - Insére l'image
+ * @param {string} img - contient le nom de l'image 
+ */
 export const getImg = ({img}) => {
 
-    console.log(img)
     let user = document.querySelector('#user_img');
     user.className="no_blur_img";
     user.setAttribute('src', img ? `/public/upload/${img}` : '/public/img/user.png')
-   
 }
 
 
 /**
  * @description - Soumettre la photo 
+ * @param {array} inputFile - Contient le fichier 
  */
-export const sendFile = async () => {
-    
-    const inputFile = document.getElementById("fileElem");
-    const errFile = document.querySelector("#err_file");
+export const sendFile = async (inputFile) => {
 
-    const file = inputFile.files[0];
-    
-    // check si un fichier est fourni
-    if (!file) return (errFile.textContent = "Aucune image soumise");
+    let uploadMsg = document.querySelector("#err_file");
+    let modal = document.querySelector('.modal');
+    // Reset err message
+    uploadMsg.textContent = "";
+    // Récupérer le fichier
+    let file = inputFile.files[0];
 
     // check si le fichier est bien au format jpeg/jpg/png
     if (!getMimeType(file.type))
-        return (errFile.textContent = "L'image doit être de format jpeg ou png");
+        return (uploadMsg.textContent =
+          "L'image doit être de format jpeg ou png");
 
     //check si la taille du fichier est > à 2MO
     if (file.size > 2000000)
-        return (errFile.textContent = "L'image ne doit pas dépasser 2Mo");
+        return (uploadMsg.textContent =
+          "L'image ne doit pas dépasser 2Mo");
 
     // Si aucune erreur, l'image est envoyée
-    const result = await axiosPostImage(file, setImg);
+    await axiosPostImage(file, setImg);
 
-    return result;
+    // Supprimer la modal
+    const remove = setTimeout(() => {
+        document.body.removeChild(modal);
+    }, 1500);
+
+    // Effet de masquage de la modal
+    const removeModal = () => setTimeout( cb => {
+         modal.classList.add('hide_modal');
+         cb
+    }, 1000);
+
+    removeModal(remove)
+
 };
 
 
