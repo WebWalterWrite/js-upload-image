@@ -1,4 +1,5 @@
 # js-upload-image
+![](https://media.giphy.com/media/2AMbZo91FnxbHQTJsN/giphy.gif)
 
 Uploader une photo de profile avec multer
 
