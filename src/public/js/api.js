@@ -45,12 +45,11 @@ export const fetchPostImage = async (file, cb) => {
 /**
  * @description Envoi fichier avec axios
  * @param {object} file - file photo
- * @param {function} cb - callback function affichage message (err ou succes)  + photo
+ * @callback cb - callback function affichage message (err ou succes)  + photo
  */
 
 export const axiosPostImage = async (file, cb) => {
 
-    console.log('axios :', file)
     let form = new FormData();
 
     form.append('profile', file, 'profile.png')
@@ -71,7 +70,7 @@ export const axiosPostImage = async (file, cb) => {
 
 /**
  * @description -récupérer l'image stockée localement
- * @param {function} cb 
+ * @callback  cb - Prend la fonction getImg 
  */
 export const axiosGetImage = async cb => {
 
@@ -83,11 +82,11 @@ export const axiosGetImage = async cb => {
 
 /**
  * @description - supprimer image de profile
+ * @param {string} name - Prend le nom de l'image
  */
 
  export const axiosDeleteImage = async name => {
      try {
-         console.log(name)
          const { data } = await axios.delete('http://localhost:3000/delete', {data:{img:`..${name}`}})
          return data
      } catch (error) {
