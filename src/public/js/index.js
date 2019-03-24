@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	const inputFile = document.getElementById("fileElem");
 	const iconBtn = document.getElementById("choose_img")
 
-	// récupérer la photo de profil
+/**
+ * @description - récupére la photo de profil stockée
+ */
 	axiosGetImage(getImg)
 
 /*
