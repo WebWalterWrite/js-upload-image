@@ -117,16 +117,17 @@ section h3{
 /* message erreur fichier */
 .upload_msg{
     text-align:center;
-    margin-top:1em !important;
+    margin:.5em 0 .5em 0 !important;
     color:#000000;
 }
+
 
 
 /* progress bar  */
 
 .contain_progress{
     height:50px;
-    opacity: hidden;
+    opacity: 0;
 }
 
 
@@ -221,6 +222,7 @@ progress[value]::-webkit-progress-value {
 }
 .content_modal{
     position: absolute;
+    padding:1em;
     width: 30%;
     height: 40%; 
     display: inline-block;
@@ -237,14 +239,14 @@ progress[value]::-webkit-progress-value {
 .box_btn{
     display: flex;
     justify-content: center;
-    margin-top:20px;
+    margin-top:10px;
 }
 
 
 .box_btn p{
     cursor: pointer;
     padding:5px;
-    margin:0px 20px 50px 20px;
+    margin:0px 20px 20px 20px;
     text-align: center;
     font-size:14px; 
     letter-spacing: 2px;
