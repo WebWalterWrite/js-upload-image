@@ -65,7 +65,8 @@ export const deleteImage = async (req, res) => {
 		await removeImg(val); // Supprime l'image
 
 		res.json({
-      msg: "La photo a bien été supprimée",
+			msg: "Votre photo a bien été supprimée",
+			img: false
     });
 	} catch (error) {
 			console.log('Une erreur est survenue deleteImage fn :', error.message)
