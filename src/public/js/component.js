@@ -1,4 +1,5 @@
 import { axiosDeleteImage } from './api.js';
+import { getImg, rmvModal } from './fn.js';
 
 /**
  * @description - Renvoi un nouvel élement HTML
@@ -36,6 +37,10 @@ export const modal = (src) => {
 // créer contenu modal
     const contentModal = createElement('div');
     contentModal.setAttribute('class', 'content_modal');
+    document.body.addEventListener('click', (e) =>{
+        e.target.className === 'modal' && rmvModal(300);
+    });
+
 
 // créer le bouton supprimer modifier de la fenêtre modale
     const img = createElement('img');
@@ -46,26 +51,30 @@ export const modal = (src) => {
         {attr:'height',val:'200px'}
     ]);
 
+    const currentImg = [img.getAttribute('src')];
+    const isDefaultImg = currentImg.includes('/public/img/user.png');
+
 // box bouton
     const boxBtn = createElement('div');
     boxBtn.setAttribute('class','box_btn');
 
 // delete bouton
     const rmv = createElement('p');
-    const rmvTxt = createText('supprimer ma photo');
+    const rmvTxt = createText('remove photo');
     createAttribute(rmv, [{attr:'id', val:'rmv'}]);
     rmv.appendChild(rmvTxt);
     rmv.addEventListener('click', async () => {
-        const name = img.hasAttribute('src') && img.getAttribute('src');
-        console.log(name)
-        await axiosDeleteImage(name);
-        img.setAttribute('src','public/img/user.png')
-         
+        let name = img.hasAttribute('src') && img.getAttribute('src');
+        let data = await axiosDeleteImage(name);
+        img.setAttribute('src','public/img/user.png');
+        fileError.textContent= data.msg;
+        rmvModal(1000);
+        getImg(data);  
     });
-
+   
 // update bouton
     const update = createElement('p');
-    const updatetext = createText('modifier ma photo');
+    const updatetext = createText(!isDefaultImg ? 'update photo' : 'upload photo');
     createAttribute(update, [{attr:'id', val:'update'}]);
     update.appendChild(updatetext);
     update.addEventListener('click', () => inputFile.click());
@@ -81,7 +90,8 @@ export const modal = (src) => {
 // error upload
     const fileError = createElement('div');
     createAttribute(fileError, [{attr: 'id', val: 'err_file'}, {attr: 'class', val: 'upload_msg'}]);
-    boxBtn.append(rmv, update);
+
+    !isDefaultImg ? boxBtn.append(rmv, update) : boxBtn.append(update);
     progressBox.append(progress, percent);
     contentModal.append(img,boxBtn, progressBox, fileError);
 
