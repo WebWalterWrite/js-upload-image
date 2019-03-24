@@ -14,12 +14,27 @@ export const getMimeType = type => {
 }
 
 
+// Supprimer la modal
+export const rmvModal = (t) => {
+       let modal = document.querySelector('.modal');
+       let remove = setTimeout(() => {
+        document.body.removeChild(modal);
+        }, t+200);
 
-  /**
-   * 
-   * @param {object} img -- path image
-   * @returns {string} -- chemin relatif à img
-   */
+    // Effet de masquage de la modal
+    const removeModal = () => setTimeout( cb => {
+         modal.classList.add('hide_modal');
+         cb
+    }, t);
+    removeModal(remove)
+}
+
+/**
+ * @description - Modifier l'image de profile
+ * @param {object} img -- path image
+ * @returns {string} -- chemin relatif à img
+ */
+
   export const setImg = ({img, msg}) => {
 
     let user = document.querySelector('#user_img')
@@ -52,7 +67,7 @@ export const getImg = ({img}) => {
 export const sendFile = async (inputFile) => {
 
     let uploadMsg = document.querySelector("#err_file");
-    let modal = document.querySelector('.modal');
+   
     // Reset err message
     uploadMsg.textContent = "";
     // Récupérer le fichier
@@ -71,19 +86,9 @@ export const sendFile = async (inputFile) => {
     // Si aucune erreur, l'image est envoyée
     await axiosPostImage(file, setImg);
 
-    // Supprimer la modal
-    const remove = setTimeout(() => {
-        document.body.removeChild(modal);
-    }, 1500);
-
-    // Effet de masquage de la modal
-    const removeModal = () => setTimeout( cb => {
-         modal.classList.add('hide_modal');
-         cb
-    }, 1000);
-
-    removeModal(remove)
-
+    rmvModal(1000)
+    
 };
+
 
 
